@@ -118,10 +118,13 @@ namespace groupCW.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             // if role doesnot exists
-            if (!_roleManager.RoleExistsAsync(SD.Role_Manager).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.Role_Manager).GetAwaiter().GetResult()
+                
+                )
             {
             _roleManager.CreateAsync(new IdentityRole(SD.Role_Manager)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.Role_Assistant)).GetAwaiter().GetResult();
+            //_roleManager.CreateAsync(new IdentityRole(SD.Role_Member)).GetAwaiter().GetResult();
             }
 
             ReturnUrl = returnUrl;
@@ -152,6 +155,14 @@ namespace groupCW.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (Input.Role == null)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Member);
+                    } else
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
