@@ -38,5 +38,16 @@
         public string actorFirstName { get; set; }
         public string actorLastName { get; set; }
 
+        // Used for number 5
+
+        
+        public int memberNumber { get; set; }
+        
+        public DateTime? dateDue { get; set; }
+       
+        public DateTime? dateReturned { get; set; }
+  
+        
+
     }
 }

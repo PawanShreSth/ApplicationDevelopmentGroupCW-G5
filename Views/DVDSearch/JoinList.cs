@@ -9,5 +9,10 @@
         public List<JoinHelper> JoinHelperList { get; set; }
 
         public bool showAllMember { get; set; } = false;
+
+        // for no 5
+        public bool showTableData { get; set; }
+
+        public string copyNumber { get; set; }  
     }
 }

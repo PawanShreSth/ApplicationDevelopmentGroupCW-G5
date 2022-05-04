@@ -1,0 +1,49 @@
+﻿@using DatabaseCoursework.Models
+@using groupCW.Views.DVDSearch
+@model JoinList
+
+<form method="post" asp-action="Index" class="mb-3 mt-3">
+     
+    <input asp-for="copyNumber" class="form-control mb-3" placeholder="Search for DVD Tile by typing Actor's surname" />
+
+     <button type="submit" class="btn btn-outline-info" style="width: 120px"><i class="bi bi-search"></i> Search</button>
+</form>
+
+@if (Model.showTableData == true)
+{
+    <table class="table text-white table-bordered table-striped mt-5" style="width: 100%">
+        <thead>
+            <tr>
+                <th style="width: 10%">DVD Title</th>
+                <th style="width: 20%">Member Name</th>
+                <th style="width: 20%">Date Out</th>
+                <th style="width: 20%">Due Date</th>
+                <th style="width: 30%">Return Date</th>
+
+            </tr>
+        </thead>
+
+          
+        <tbody >
+            @foreach(var obj in Model.JoinHelperList)
+            {
+                <tr>
+                    <td class="text-white" width="10%">@obj.dvdtitle</td>
+                    <td class="text-white" width="20%">@obj.fName @obj.lName</td>
+                    <td class="text-white" width="20%">@obj.dateOut</td>
+                    <td class="text-white" width="20%">@obj.dateDue</td>
+                    <td class="text-white" width="30%">
+                        @if (@obj.dateReturned == null)
+                        {
+                            <span>Not Returned Yet</span>
+                        } else
+                        {
+                            <span>@obj.dateReturned</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    
+    </table>
+}

@@ -20,7 +20,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="DVDWithAvailability">Search DVD with availability</a>
+                            <a class="nav-link" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">Search DVD with availability</a>
                         </li>
 
                 @if(User.IsInRole("Manager") || User.IsInRole("Assistant"))
@@ -30,6 +30,7 @@
                           <div class="dropdown-menu" style="min-width: 320px">
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="MemberSearch" asp-action="Index">Search Members</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="CastMemberSearch" asp-action="Index">Show Producers, Studio & Cast Lists</a>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">Search DVD by Copy Number</a>
                                 @*<div class="dropdown-divider"></div>*@
                            </div>
                 </li>
