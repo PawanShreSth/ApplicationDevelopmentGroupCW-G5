@@ -47,7 +47,7 @@ namespace groupCW.Controllers
                      lName = act.ActorSurname,
                      castMemberId = castmeme.castmemberid,
                      dTitleName = castmeme.dTitle,
-                     releaseDate2 = castmeme.releaseDate
+                     
                  }
                  ).Where(x => x.lName.ToLower() == lName.ToLower()).ToList();
 
@@ -68,7 +68,43 @@ namespace groupCW.Controllers
                 return RedirectToAction("DVDWithAvailability");
             }
 
-                return View();
+
+            var test = (
+                        from l in _db.Loans
+                        join dvcpy in _db.DVDCopies
+                        on l.CopyNumber equals dvcpy.CopyNumber
+                        join dvtitle in _db.DVDTitles
+                        on dvcpy.DVDNumber equals dvtitle.DVDNumber
+                        join casmem in _db.CastMembers
+                        on dvtitle.DVDNumber equals casmem.DVDNumber
+                        join a in _db.Actors
+                        on casmem.ActorNumber equals a.ActorNumber
+                        group new {
+                            Loan = l,
+                            DVDCop = dvcpy,
+                            DVDTit = dvtitle,
+                            CASTMEMB = casmem,
+                            ACT = a,
+
+                        } by dvtitle.DVDTitles
+                        //select new JoinHelper
+                        //{
+                        //    fName = a.ActorFirstname,
+                        //    lName = a.ActorSurname,
+                        //    dvdReturnedDate = l.DateReturned,
+                        //    castMemberId = casmem.DVDNumber,
+                        //    dvdtitle = dvtitle.DVDTitles,
+                        //    copyId = dvcpy.CopyNumber
+
+
+                        //}
+                ).ToList();
+                //.Where(x => x.lName == lName.ToLower())
+                
+      
+
+            return Json(test);
+
         }
 
 

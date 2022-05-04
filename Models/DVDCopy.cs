@@ -10,6 +10,6 @@ namespace DatabaseCoursework.Models
 
         public int DVDNumber { get; set; }
 
-        public DateTime DatePurchased { get; set; }
+        public DateTime? DatePurchased { get; set; }
     }
 }

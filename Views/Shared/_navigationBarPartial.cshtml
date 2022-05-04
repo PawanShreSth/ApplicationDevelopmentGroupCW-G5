@@ -23,19 +23,12 @@
                             <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="DVDWithAvailability">Search DVD with availability</a>
                         </li>
 
-                @if(User.IsInRole("Manager"))
+                @if(User.IsInRole("Manager") || User.IsInRole("Assistant"))
                 {
                     <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Manager</a>
+                            <a class="nav-link" asp-area="" asp-controller="MemberSearch" asp-action="Index">Search Members</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Assistant</a>
-                    </li>
-                } else if(User.IsInRole("Assistant"))
-                {
-                    <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Assistant</a>
-                    </li>
+                       
                 }
 
                     </ul>
