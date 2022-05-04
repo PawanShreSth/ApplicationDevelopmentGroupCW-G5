@@ -1,0 +1,29 @@
+﻿@using DatabaseCoursework.Models
+@using groupCW.Views.DVDSearch
+@model IEnumerable<JoinHelper>
+
+<table class="table text-white table-bordered table-striped mt-5" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 25%">DVD Titles</th>
+            <th style="width: 25%">Producer Name</th>
+            <th style="width: 25%">Studio Name</th>
+            <th style="width: 25%">Actor Name</th>
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td class="text-white" width="25%">@obj.dvdTitle</td>
+                <td class="text-white" width="25%">@obj.producerName</td>
+                <td class="text-white" width="25%">@obj.studioName</td>
+                <td class="text-white" width="25%">@obj.actorFirstName @obj.actorLastName</td>
+
+            </tr>
+        }
+    </tbody>
+    
+</table>
