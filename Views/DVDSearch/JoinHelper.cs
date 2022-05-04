@@ -9,7 +9,7 @@
 
         public string dTitleName { get; set; }
 
-        public string releaseDate2 { get; set; }
+        public DateTime releaseDate2 { get; set; }
 
 
     }

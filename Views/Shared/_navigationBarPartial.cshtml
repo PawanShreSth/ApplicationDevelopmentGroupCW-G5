@@ -16,8 +16,28 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Search For DVDs</a>
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Search DVD</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="DVDWithAvailability">Search DVD with availability</a>
+                        </li>
+
+                @if(User.IsInRole("Manager"))
+                {
+                    <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Manager</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Assistant</a>
+                    </li>
+                } else if(User.IsInRole("Assistant"))
+                {
+                    <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Assistant</a>
+                    </li>
+                }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

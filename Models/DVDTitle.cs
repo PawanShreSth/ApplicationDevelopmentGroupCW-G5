@@ -12,8 +12,7 @@ namespace DatabaseCoursework.Models
         public int StudioNumber { get; set; }
         public int ProducerNumber { get; set; }  
         public string DVDTitles { get; set; }
-        public string DateReleased { get; set; }
-
+        public DateTime DateReleased { get; set; }
         public string StandardCharge { get; set; }
         public string PenaltyCharge { get; set; }
 

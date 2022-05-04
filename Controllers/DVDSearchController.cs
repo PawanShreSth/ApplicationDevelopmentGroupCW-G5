@@ -23,18 +23,12 @@ namespace groupCW.Controllers
             return View();
         }
 
-        [Authorize]
-        public IActionResult Test()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult Filter(string lName)
         {
-            if (lName == null)
+            if (lName == null || lName.Trim() == "")
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             IEnumerable<JoinHelper> objDvdList = _db.DVDTitles.Join(_db.CastMembers,
@@ -57,9 +51,24 @@ namespace groupCW.Controllers
                  }
                  ).Where(x => x.lName.ToLower() == lName.ToLower()).ToList();
 
-            
+
 
             return View(objDvdList);
+        }
+
+        public IActionResult DVDWithAvailability()
+        {
+            return View();
+        }
+
+        public IActionResult FilterWithAvailability(string lName)
+        {
+            if (lName == null || lName.Trim() == "")
+            {
+                return RedirectToAction("DVDWithAvailability");
+            }
+
+                return View();
         }
 
 
