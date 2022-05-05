@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace groupCW.Controllers
 {
+    // Number 8
     public class TotalDVDLoanController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -1,0 +1,36 @@
+﻿@using groupCW.ViewModel
+
+@{
+    ViewData["Title"] = "SalesInGivenDate";
+}
+
+@model List<LoanedOutDVDViewModel>
+
+<h3 class="text-white mb-5 text-center">DVD Copy number</h3>
+
+<table class="table text-white table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 30%" class="text-white text-center">Date out</th>
+            <th style="width: 30%" class="text-white text-center">DVD Title</th>
+            <th style="width: 30%" class="text-white text-center">Copy No.</th>
+            <th style="width: 30%" class="text-white text-center">Member Who bought the DVD</th>
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td class="text-white text-center" width="30%">@obj.dateOut</td>
+                <td class="text-white text-center" width="30%">@obj.dvdTitle</td>
+                <td class="text-white text-center" width="30%">@obj.copyNumber</td>
+                <td class="text-white text-center" width="30%">@obj.fName @obj.lName</td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+
+

@@ -1,0 +1,36 @@
+﻿
+@using groupCW.ViewModel
+
+@model List<LoanedOutDVDViewModel>
+
+<h3 class="text-white mb-5 text-center">Number of DVDs on loan in each day and Not Returned</h3>
+
+<table class="table text-white table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            @*<th style="width: 20%">DVD Title</th>*@
+         @*   <th style="width: 5%">Copy No.</th>*@
+           @* <th style="width: 25%">Name of memeber who borrowed</th>*@
+            <th class="text-white text-center" style="width: 15%">Date Out</th>
+            <th class="text-white text-center" style="width: 5%">Total No. of loans</th>
+            <th class="text-white text-center" style="width: 20%"></th>
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                @*<td class="text-white" width="20%">@obj.dvdTitle</td>*@
+                @*<td class="text-white" width="5%">@obj.copyNumber</td>*@
+                <td class="text-white text-center" width="15%">@obj.dateOut</td>
+                <td class="text-white text-center" width="5%">@obj.TotalNumberOfLoans</td>   
+                 <td class="text-white text-center" width="20%">
+                   <a asp-route-date="@obj.dateOut" asp-controller="LoanedOutDVDs" asp-action="SalesInGivenDate" class="badge rounded-pill bg-info text-decoration-none">View Members who bought dvd in @obj.dateOut</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>

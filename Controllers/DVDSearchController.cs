@@ -70,41 +70,63 @@ namespace groupCW.Controllers
                 return RedirectToAction("DVDWithAvailability");
             }
 
+            IEnumerable<JoinHelper> objDvdList = (IEnumerable<JoinHelper>)_db.Loans.Join(_db.DVDCopies,
+                loan => loan.CopyNumber, dvdcopy => dvdcopy.CopyNumber,
+                (loan, dvdcopy) => new
+                {
+                    dvdIdFromCopies = dvdcopy.DVDNumber,
+                    dvdReturnedDate = loan.DateReturned,
+                    copyId = dvdcopy.CopyNumber,
+                    dvdNumberId = dvdcopy.DVDNumber,
+                    dateOut = loan.DateOut,
+                }
+            ).Join(_db.DVDTitles,
+                dvdcopies => dvdcopies.dvdNumberId, dvdtitles => dvdtitles.DVDNumber,
+                (dvdcopies, dvdtitles) => new
+                {
+                    dvdIdFromCopies = dvdcopies.dvdIdFromCopies,
+                    copyId = dvdcopies.copyId,
+                    dvdReturnedDate = dvdcopies.dvdReturnedDate,
+                    dvdNumberId = dvdtitles.DVDNumber,
+                    releaseDate2 = dvdtitles.DateReleased,
+                    dvdtitle = dvdtitles.DVDTitles,
+                    dateOut = dvdcopies.dateOut,
+                }
+            ).Join(_db.CastMembers,
+                dvdtitnumber => dvdtitnumber.dvdNumberId, castmem => castmem.DVDNumber,
+                (dvdtitnumber, castmem) => new
+                {
+                    dvdIdFromCopies = dvdtitnumber.dvdIdFromCopies,
+                    dvdtitle = dvdtitnumber.dvdtitle,
+                    copyId = dvdtitnumber.copyId,
+                    dvdReturnedDate = dvdtitnumber.dvdReturnedDate,
+                    releaseDate2 = dvdtitnumber.releaseDate2 == null ? "" : dvdtitnumber.releaseDate2.ToString(),
+                    dvdNumberId = dvdtitnumber.dvdNumberId,
+                    castmemberid = castmem.DVDNumber,
+                    actoriden = castmem.ActorNumber,
+                    dateOut = dvdtitnumber.dateOut,
+                }
+            ).Join(_db.Actors,
+                castmeme => castmeme.actoriden, act => act.ActorNumber,
+                (castmeme, act) => new JoinHelper
+                {
+                    dvdNumberId = castmeme.dvdIdFromCopies,
+                    fName = act.ActorFirstname,
+                    lName = act.ActorSurname,
+                    dvdReturnedDate = castmeme.dvdReturnedDate,
+                    castMemberId = castmeme.castmemberid,
+                    releaseDate2 = castmeme.releaseDate2,
+                    dvdtitle = castmeme.dvdtitle,
+                    copyId = castmeme.copyId,
+                    dateOut = castmeme.dateOut
+                }
+            ).Where(x => x.lName.ToLower() == lName.ToLower())
+            .ToList();
 
-            //var test = (
-            //            from l in _db.Loans
-            //            join dvcpy in _db.DVDCopies
-            //            on l.CopyNumber equals dvcpy.CopyNumber
-            //            join dvtitle in _db.DVDTitles
-            //            on dvcpy.DVDNumber equals dvtitle.DVDNumber
-            //            join casmem in _db.CastMembers
-            //            on dvtitle.DVDNumber equals casmem.DVDNumber
-            //            join a in _db.Actors
-            //            on casmem.ActorNumber equals a.ActorNumber
-            //            group new {
-            //                Loan = l,
-            //                DVDCop = dvcpy,
-            //                DVDTit = dvtitle,
-            //                CASTMEMB = casmem,
-            //                ACT = a,
-
-            //            } by dvtitle.DVDTitles
-            //            //select new JoinHelper
-            //            //{
-            //            //    fName = a.ActorFirstname,
-            //            //    lName = a.ActorSurname,
-            //            //    dvdReturnedDate = l.DateReturned,
-            //            //    castMemberId = casmem.DVDNumber,
-            //            //    dvdtitle = dvtitle.DVDTitles,
-            //            //    copyId = dvcpy.CopyNumber
+            return View(objDvdList);
 
 
-            //            //}
-            //    ).ToList();
-            //.Where(x => x.lName == lName.ToLower())
-
-            
-            return View();
+            //return Json(objDvdList);
         }
 
 
