@@ -1,0 +1,43 @@
+﻿
+@using groupCW.ViewModel
+
+@model List<TotalDVDLoanViewModel>
+
+
+
+<table class="table text-white table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 5%">Address</th>
+            <th style="width: 15%">Membership Category</th>
+            <th style="width: 15%">Total Loan Allowed</th>
+            <th style="width: 5%">Total Loan Taken</th>
+            <th style="width: 30%">Is Loan Over Limit?</th>
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td class="text-white" width="20%">@obj.FirstName @obj.LastName</td>
+                <td class="text-white" width="5%">@obj.Address</td>
+                <td class="text-white" width="15%">@obj.MembershipCategoryDescription</td>
+                <td class="text-white" width="5%">@obj.MembershipCategoryTotalLoans</td>
+                <td class="text-white" width="20%">@obj.Total</td>
+                <td class="text-white" width="30%">
+                    @if (@obj.Total <= @obj.MembershipCategoryTotalLoans)
+                    {
+                        <span>DVD Loan taken within limits</span>
+                    } else
+                    {
+                        <span>Too many DVDs</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>

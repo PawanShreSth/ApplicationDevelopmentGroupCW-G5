@@ -16,11 +16,11 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">Search DVD</a>
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="Index">1 Search DVD</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">Search DVD with availability</a>
+                            <a class="nav-link" asp-area="" asp-controller="DVDSearch" asp-action="DVDWithAvailability">2 Search DVD with availability</a>
                         </li>
 
                 @if(User.IsInRole("Manager") || User.IsInRole("Assistant"))
@@ -28,9 +28,11 @@
                     <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
                           <div class="dropdown-menu" style="min-width: 320px">
-                                <a class="nav-link text-black hover" asp-area="" asp-controller="MemberSearch" asp-action="Index">Search Members</a>
-                                <a class="nav-link text-black hover" asp-area="" asp-controller="CastMemberSearch" asp-action="Index">Show Producers, Studio & Cast Lists</a>
-                                <a class="nav-link text-black hover" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">Search DVD by Copy Number</a>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="MemberSearch" asp-action="Index">3 Search Members</a>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="CastMemberSearch" asp-action="Index">4 Show Producers, Studio & Cast Lists</a>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">5 Search DVD by Copy Number</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="TotalDVDLoan" asp-action="Index">8 Search Member with total loan taken</a>
                                 @*<div class="dropdown-divider"></div>*@
                            </div>
                 </li>

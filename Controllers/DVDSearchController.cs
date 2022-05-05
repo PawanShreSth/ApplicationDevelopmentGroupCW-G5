@@ -1,5 +1,6 @@
 ﻿using DatabaseCoursework.Models;
 using groupCW.Data;
+using groupCW.ViewModel;
 using groupCW.Views.DVDSearch;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +62,7 @@ namespace groupCW.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult FilterWithAvailability(string lName)
         {
             if (lName == null || lName.Trim() == "")
@@ -69,42 +71,40 @@ namespace groupCW.Controllers
             }
 
 
-            var test = (
-                        from l in _db.Loans
-                        join dvcpy in _db.DVDCopies
-                        on l.CopyNumber equals dvcpy.CopyNumber
-                        join dvtitle in _db.DVDTitles
-                        on dvcpy.DVDNumber equals dvtitle.DVDNumber
-                        join casmem in _db.CastMembers
-                        on dvtitle.DVDNumber equals casmem.DVDNumber
-                        join a in _db.Actors
-                        on casmem.ActorNumber equals a.ActorNumber
-                        group new {
-                            Loan = l,
-                            DVDCop = dvcpy,
-                            DVDTit = dvtitle,
-                            CASTMEMB = casmem,
-                            ACT = a,
+            //var test = (
+            //            from l in _db.Loans
+            //            join dvcpy in _db.DVDCopies
+            //            on l.CopyNumber equals dvcpy.CopyNumber
+            //            join dvtitle in _db.DVDTitles
+            //            on dvcpy.DVDNumber equals dvtitle.DVDNumber
+            //            join casmem in _db.CastMembers
+            //            on dvtitle.DVDNumber equals casmem.DVDNumber
+            //            join a in _db.Actors
+            //            on casmem.ActorNumber equals a.ActorNumber
+            //            group new {
+            //                Loan = l,
+            //                DVDCop = dvcpy,
+            //                DVDTit = dvtitle,
+            //                CASTMEMB = casmem,
+            //                ACT = a,
 
-                        } by dvtitle.DVDTitles
-                        //select new JoinHelper
-                        //{
-                        //    fName = a.ActorFirstname,
-                        //    lName = a.ActorSurname,
-                        //    dvdReturnedDate = l.DateReturned,
-                        //    castMemberId = casmem.DVDNumber,
-                        //    dvdtitle = dvtitle.DVDTitles,
-                        //    copyId = dvcpy.CopyNumber
+            //            } by dvtitle.DVDTitles
+            //            //select new JoinHelper
+            //            //{
+            //            //    fName = a.ActorFirstname,
+            //            //    lName = a.ActorSurname,
+            //            //    dvdReturnedDate = l.DateReturned,
+            //            //    castMemberId = casmem.DVDNumber,
+            //            //    dvdtitle = dvtitle.DVDTitles,
+            //            //    copyId = dvcpy.CopyNumber
 
 
-                        //}
-                ).ToList();
-                //.Where(x => x.lName == lName.ToLower())
-                
-      
+            //            //}
+            //    ).ToList();
+            //.Where(x => x.lName == lName.ToLower())
 
-            return Json(test);
-
+            
+            return View();
         }
 
 

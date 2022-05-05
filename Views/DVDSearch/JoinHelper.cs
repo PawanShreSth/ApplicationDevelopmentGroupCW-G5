@@ -2,15 +2,17 @@
 {
     public class JoinHelper
     {
+        internal string dvdTitle;
+
         // This class was created to supply multiple models in a view
         public string fName { get; set; }
         public string lName { get; set; }
         public int castMemberId { get; set; }
-        public int castmemberid { get; set; }
+
         public int actoriden { get; set; }
         public int dvdNumberId { get; set; }
         public string dTitleName { get; set; }
-        public string dvdtitle { get; set; }
+        
         public int dNumber { get; set; }
         public string releaseDate2 { get; set; }
 
@@ -31,7 +33,6 @@
 
         // Used for number 4
         public int dvdId { get; set; }
-        public string dvdTitle { get; set; }
         public string? producerName { get; set; }
         public string studioName { get; set; }
 
@@ -40,14 +41,28 @@
 
         // Used for number 5
 
-        
+        public string dvdtitle { get; set; }
         public int memberNumber { get; set; }
         
         public DateTime? dateDue { get; set; }
        
         public DateTime? dateReturned { get; set; }
-  
-        
 
+
+        // 8
+        public int MemberNumbers { get; set; }
+        public string FirstNames { get; set; }
+
+        public string LastNames { get; set; }
+        public string Addresss { get; set; }
+
+        public string DateOfBirths { get; set; }
+
+        public int LoanMemberId { get; set; }
+
+        public string DateReturneds { get; set; }
+        public int UID { get; internal set; }
+        public List<JoinHelper> List { get; internal set; }
+        public int Total { get; internal set; }
     }
 }
