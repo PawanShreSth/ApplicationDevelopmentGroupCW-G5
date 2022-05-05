@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Not Loaned DVD For last 31 Days";
+}
+
+
+@using groupCW.ViewModel
+
+@model List<NoCopyLoanedForLast31DaysViewModel>
+
+<h3 class="text-white mb-5 text-center">DVD Not borrowed in the last 31 days</h3>
+
+<table class="table text-white table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th class="text-white text-center" style="width: 25%">DVD Title</th>
+            <th class="text-white text-center" style="width: 25%">Date out</th>
+
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                 
+                <td class="text-white text-center" width="25%">@obj.dvdTitle</td>
+                <td class="text-white text-center" width="25%">@obj.dateOut</td>
+                 
+            </tr>
+        }
+    </tbody>
+    
+</table>
+
