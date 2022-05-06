@@ -123,6 +123,29 @@ namespace groupCW.Controllers
                 ).Where(x => x.copyNumber == no)
                 .ToList();
 
+            List<int> copyNumbers = _db.DVDCopies.Select(x => x.CopyNumber).ToList();
+
+            var x = Int32.Parse(copyNumber);
+
+            var validCopyNumbers = "";
+
+            if (copyNumbers.IndexOf(x) == -1 )
+            {
+                for(int i = 0; i < copyNumbers.Count(); i++)
+                {
+                    validCopyNumbers += ", " + copyNumbers[i];
+                }
+
+                return Content("There are no copies with copy number " + copyNumber + ". | Valid copy numbers : " + validCopyNumbers.Substring(1));
+
+            }
+
+            if (objDvdList.Count() <= 0)
+            {
+                return Content("Copy number " + copyNumber + " has yet not been loaned, so there is no last loan date for copy number " + copyNumber);
+
+            }
+
             DateTime latestOutDate = DateTime.Now;
 
             for (var i = 0; i < 1;)

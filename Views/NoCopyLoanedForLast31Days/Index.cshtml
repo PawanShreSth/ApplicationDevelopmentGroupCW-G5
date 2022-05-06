@@ -11,10 +11,13 @@
 <h3 class="text-white mb-5 text-center">DVD Not borrowed in the last 31 days</h3>
 
 <table class="table text-white table-bordered table-striped" style="width: 100%">
-    <thead>
+    <thead style="border-bottom: 2px solid white;">
         <tr>
-            <th class="text-white text-center" style="width: 25%">DVD Title</th>
-            <th class="text-white text-center" style="width: 25%">Date out</th>
+            <th class="text-white text-center" style="width: 10%">DVD Title</th>
+            <th class="text-white text-center" style="width: 20%">Copy Number</th>
+            <th class="text-white text-center" style="width: 20%">Last Loaned Date</th>
+            <th class="text-white text-center" style="width: 25%">Today's Date</th>
+            <th class="text-white text-center" style="width: 45%">No. of days since last loan</th>
 
         </tr>
     </thead>
@@ -25,8 +28,12 @@
         {
             <tr>
                  
-                <td class="text-white text-center" width="25%">@obj.dvdTitle</td>
-                <td class="text-white text-center" width="25%">@obj.dateOut</td>
+                <td class="text-white text-center" width="10%">@obj.dvdTitle</td>
+                <td class="text-white text-center" width="20%">@obj.copyNumber</td>
+                <td class="text-white text-center" width="20%">@obj.dateOut</td>
+                <td class="text-white text-center" width="25%">@obj.currentDate</td>
+                <td class="text-white text-center" width="45%">@obj.noOfDaysSinceLastLoan</td>
+
                  
             </tr>
         }

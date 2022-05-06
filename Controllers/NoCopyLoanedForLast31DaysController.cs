@@ -11,7 +11,7 @@ namespace groupCW.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(IEnumerable<NoCopyLoanedForLast31DaysViewModel> x)
         {
             List<NoCopyLoanedForLast31DaysViewModel> dvdList = _db.Loans
                 .Join(
@@ -20,7 +20,8 @@ namespace groupCW.Controllers
                     (loans, dvdcopies) => new NoCopyLoanedForLast31DaysViewModel
                     {
                         dvdNumber = dvdcopies.DVDNumber,
-                        dateOut = loans.DateOut
+                        dateOut = loans.DateOut,
+                        copyNumber = dvdcopies.CopyNumber
                     }
                 )
                 .Join(
@@ -30,11 +31,28 @@ namespace groupCW.Controllers
                     {
                         dvdNumber = dvdcopies.dvdNumber,
                         dvdTitle = dvdtitle.DVDTitles,
-                        dateOut = dvdcopies.dateOut
+                        dateOut = dvdcopies.dateOut,
+                        copyNumber = dvdcopies.copyNumber
                     }
                 )
                 .Where(
                     x => (DateTime.Now.AddDays(-31) >= x.dateOut)
+                )
+                .GroupBy(
+                    x => x.dvdTitle
+                ).
+                Select(
+                    x => new NoCopyLoanedForLast31DaysViewModel
+                    {
+                        total = x.Count(),
+                        dvdNumber = x.Single().dvdNumber,
+                        dvdTitle = x.Single().dvdTitle,
+                        dateOut = x.Single().dateOut,
+                        copyNumber = x.Single().copyNumber,
+                        records = x.ToList(),
+                        currentDate = DateTime.Now,
+                        noOfDaysSinceLastLoan =  (DateTime.Now - x.Single().dateOut).Value.Days.ToString(),
+                    }
                 )
                 .ToList();
 

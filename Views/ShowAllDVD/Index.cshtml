@@ -1,0 +1,191 @@
+﻿@using groupCW.ViewModel
+
+@model List<ShowAllViewModel>
+
+
+
+<table class="table text-white table-bordered table-striped mb-5" style="width: 100%">
+    <thead style="border-bottom: 2px solid white;">
+        <tr>
+            <th style="width: 3%">DVD Title</th>
+            <th style="width: 2%">Copy No</th>
+            <th style="width: 2%">Loan No</th>
+            <th style="width: 3%">Loan Type</th>
+            <th style="width: 15%">Date Out</th>
+            <th style="width: 15%">Due Date</th>
+            <th style="width: 15%">Date Returned</th>
+            <th style="width: 5%">Is late?</th>
+            <th style="width: 5%">Total late days</th>
+            <th style="width: 8%">Penalty Charge (per day)</th>
+            <th style="width: 5%">Total Penalty</th>
+            <th style="width: 5%">Btn</th>
+        </tr>
+    </thead>
+
+          
+    <tbody >
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td class="text-white" width="3%">@obj.DvdTitle</td>
+                <td class="text-white" width="2%">@obj.CopyNumber</td>
+                
+                @*Loan No*@
+                <td class="text-white" width="2%">
+                    @if (@obj.LoanNumber == null)
+                    {
+                        <span>-</span>
+                    } else
+                    {
+                        <span>@obj.LoanNumber</span>
+                    }
+                </td>
+
+                @*Loan Type*@
+                <td class="text-white" width="3%">
+                    @if (@obj.LoanType == null)
+                    {
+                        <span>-</span>
+                    } else
+                    {
+                        <span>@obj.LoanType</span>
+                    }
+                </td>
+
+                @*Date Out*@
+                <td class="text-white" width="15%">
+                    @if (@obj.DateOut != null)
+                    {
+                        <span>@obj.DateOut</span>
+                    } else
+                    {
+                        <span>Not Loaned Yet</span>
+                    }
+                </td>
+
+                @*Due Date*@
+                <td class="text-white" width="15%">
+                    @if (@obj.DateOut != null) {
+                        <span>@obj.DueDate</span>
+                    } else {
+                        <span>-</span>
+                    }
+                </td>
+
+                @*Date Returned*@
+                <td class="text-white" width="5%">
+                    @if (@obj.DateOut != null && @obj.ReturnDate == null)
+                    {
+                        <span>Not Returned</span>
+                    } else if (@obj.DateOut != null && @obj.ReturnDate != null)
+                    {
+                        <span>@obj.ReturnDate</span>
+                    } else if (@obj.DateOut == null)
+                    {
+                        <span>-</span>
+                    }
+                </td>
+
+                @*Is late?*@
+                <td class="text-white" width="5%">
+                    @if (@obj.DateOut == null)
+                    {
+                        <span>-</span>
+                    } else if (@obj.ReturnDate > @obj.DueDate)
+                    {                        
+                        <span>Yes</span>
+                    } else
+                    {
+                        <span>No</span>
+                    }
+
+                </td>
+
+                @*If late? Total late days*@
+                <td class="text-white" width="5%">
+                    @if (@obj.DateOut == null)
+                    {
+                        <span>-</span>
+                    } else if (@obj.ReturnDate > @obj.DueDate)
+                    {           
+                        
+                       <span>@obj.NoOfDaysDVDNotReturnedAfterDeadline.Split('.')[0]</span>
+
+
+                    } else
+                    {
+                        <span>-</span>
+                    }
+
+                </td>
+                
+                @*Penalty Charge (per day)*@
+                <td class="text-white" width="8%">
+                   
+                    @if (@obj.ReturnDate > @obj.DueDate)
+                    {
+                        <span>@obj.PenaltyCharge</span>
+                        
+                    } else
+                    {
+                        <span>-</span>
+                    
+                    }  
+                </td>
+
+                @*Total Penalty*@
+                <td class="text-white" width="3%">
+
+                    @if ( 
+                    @obj.NoOfDaysDVDNotReturnedAfterDeadline != null
+                    && @obj.ReturnDate != null && @obj.DueDate != null
+                   )
+                    {
+
+                        @if (@obj.NoOfDaysDVDNotReturnedAfterDeadline.Contains('-'))
+                        {
+                            <span></span>
+                        } else
+                        {
+                            var x = @obj.NoOfDaysDVDNotReturnedAfterDeadline.Split('.')[0];
+
+                            var y = Int32.Parse(x);
+
+                            <span>@( @obj.PenaltyCharge * y )</span>
+
+                        }
+                    }
+
+                </td>
+
+                @*Update Button*@
+                <td class="text-white" width="5%">
+
+                    @if (@obj.DateOut != null && @obj.ReturnDate == null)
+                    {
+                        <a 
+                     style="text-decoration: none"
+                     class="badge rounded-pill bg-info" 
+                     asp-route-loanid="@obj.LoanNumber" 
+                     asp-controller="ShowAllDVD" asp-action="UpdateReturnDate">Add Return Date</a>
+                    }
+
+                     
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    
+</table>
+ @*@( @obj.PenaltyCharge * Int32.Parse(@obj.NoOfDaysDVDNotReturnedAfterDeadline.Split('.')[0]) )*@
+@*    @if (@obj.NoOfDaysDVDNotReturnedAfterDeadline != null &&  Int32.Parse(@obj.NoOfDaysDVDNotReturnedAfterDeadline.Split('.')[0]) > 0 )
+                        {
+                            <span>
+                               
+                            </span>
+                        } else
+                        {
+                            <span>-</span>
+                        }*@

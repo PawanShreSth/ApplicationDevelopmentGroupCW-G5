@@ -27,7 +27,7 @@
     </style>
     @RenderSection("manualCSS", false)
 </head>
-<body style="height: 100vh">
+<body style="min-height: 100vh; position: relative;">
     <header>
         <partial name="_navigationBarPartial" />
     </header>
@@ -37,7 +37,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="position: absolute; bottom: 0;">
         <div class="container text-center text-white">
             <span class="badge rounded-pill bg-info">&copy; 2022 - Application Development Group Course Work (Group 5)</span>
         </div>
