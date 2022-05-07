@@ -26,7 +26,7 @@
 
         public DateTime? dateOut { get; set; }
 
-        public int loan { get; set; }
+        public int loanNumber { get; set; }
 
         public DateTime? dvdCopyDatePurchased { get; set; }
 

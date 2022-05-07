@@ -4,6 +4,7 @@ using groupCW.ViewModel;
 using groupCW.Views.DVDSearch;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace groupCW.Controllers
 {
@@ -18,7 +19,7 @@ namespace groupCW.Controllers
             _db = db;
         }
 
-        
+        // Number 1
         public IActionResult Index()
         {
             return View();
@@ -57,6 +58,7 @@ namespace groupCW.Controllers
             return View(objDvdList);
         }
 
+        // Number 2
         public IActionResult DVDWithAvailability()
         {
             return View();
@@ -70,61 +72,56 @@ namespace groupCW.Controllers
                 return RedirectToAction("DVDWithAvailability");
             }
 
-            IEnumerable<JoinHelper> objDvdList = (IEnumerable<JoinHelper>)_db.Loans.Join(_db.DVDCopies,
-                loan => loan.CopyNumber, dvdcopy => dvdcopy.CopyNumber,
-                (loan, dvdcopy) => new
-                {
-                    dvdIdFromCopies = dvdcopy.DVDNumber,
-                    dvdReturnedDate = loan.DateReturned,
-                    copyId = dvdcopy.CopyNumber,
-                    dvdNumberId = dvdcopy.DVDNumber,
-                    dateOut = loan.DateOut,
-                }
-            ).Join(_db.DVDTitles,
-                dvdcopies => dvdcopies.dvdNumberId, dvdtitles => dvdtitles.DVDNumber,
-                (dvdcopies, dvdtitles) => new
-                {
-                    dvdIdFromCopies = dvdcopies.dvdIdFromCopies,
-                    copyId = dvdcopies.copyId,
-                    dvdReturnedDate = dvdcopies.dvdReturnedDate,
-                    dvdNumberId = dvdtitles.DVDNumber,
-                    releaseDate2 = dvdtitles.DateReleased,
-                    dvdtitle = dvdtitles.DVDTitles,
-                    dateOut = dvdcopies.dateOut,
-                }
-            ).Join(_db.CastMembers,
-                dvdtitnumber => dvdtitnumber.dvdNumberId, castmem => castmem.DVDNumber,
-                (dvdtitnumber, castmem) => new
-                {
-                    dvdIdFromCopies = dvdtitnumber.dvdIdFromCopies,
-                    dvdtitle = dvdtitnumber.dvdtitle,
-                    copyId = dvdtitnumber.copyId,
-                    dvdReturnedDate = dvdtitnumber.dvdReturnedDate,
-                    releaseDate2 = dvdtitnumber.releaseDate2 == null ? "" : dvdtitnumber.releaseDate2.ToString(),
-                    dvdNumberId = dvdtitnumber.dvdNumberId,
-                    castmemberid = castmem.DVDNumber,
-                    actoriden = castmem.ActorNumber,
-                    dateOut = dvdtitnumber.dateOut,
-                }
-            ).Join(_db.Actors,
-                castmeme => castmeme.actoriden, act => act.ActorNumber,
-                (castmeme, act) => new JoinHelper
-                {
-                    dvdNumberId = castmeme.dvdIdFromCopies,
-                    fName = act.ActorFirstname,
-                    lName = act.ActorSurname,
-                    dvdReturnedDate = castmeme.dvdReturnedDate,
-                    castMemberId = castmeme.castmemberid,
-                    releaseDate2 = castmeme.releaseDate2,
-                    dvdtitle = castmeme.dvdtitle,
-                    copyId = castmeme.copyId,
-                    dateOut = castmeme.dateOut
-                }
-            ).Where(x => x.lName.ToLower() == lName.ToLower())
-            .ToList();
+            List<FilterWithAvailabilityViewModel> objDvdList = (
+                    from actors in _db.Actors
+                    join castmember in _db.CastMembers on actors.ActorNumber equals castmember.ActorNumber
 
-            return View(objDvdList);
+                    join dvdtitles in _db.DVDTitles on castmember.DVDNumber equals dvdtitles.DVDNumber
 
+                    join dvdcopies in _db.DVDCopies on dvdtitles.DVDNumber equals dvdcopies.DVDNumber
+                    group dvdcopies by new { dvdNumber = dvdcopies.DVDNumber, dvdTitle = dvdtitles.DVDTitles, actorFName = actors.ActorFirstname,
+                    actorLName = actors.ActorSurname
+                    } into grp
+
+                    select new FilterWithAvailabilityViewModel
+                    {
+                        dvdTitle = grp.Key.dvdTitle.ToString(),
+                        fName = grp.Key.actorFName.ToString(),
+                        lName = grp.Key.actorLName.ToString(),
+                        dvdNumber = grp.FirstOrDefault().DVDNumber,
+                        total = grp.Count(),
+                        total2 = grp.Count()
+                    }
+                ).ToList();
+
+            List<FilterWithAvailabilityViewModel> objDvdList2 = (
+                    from dvdcopies in _db.DVDCopies
+                    join loan in _db.Loans on dvdcopies.CopyNumber equals loan.CopyNumber
+                    where loan.DateReturned == null
+                    group dvdcopies by dvdcopies.DVDNumber into grp
+                    select new FilterWithAvailabilityViewModel
+                    {
+                        dvdNumber = grp.FirstOrDefault().DVDNumber,
+                        count = grp.Count()
+                    }
+                ).ToList();
+
+            for (var i = 0; i < objDvdList.Count(); i++) {
+
+                for (var j = 0; j < objDvdList2.Count(); j++) {
+
+                    if (objDvdList[i].dvdNumber == objDvdList2[j].dvdNumber) { 
+                        objDvdList[i].total = objDvdList[i].total - objDvdList2[j].count;
+                    }
+                
+                }
+
+            }
+
+            List<FilterWithAvailabilityViewModel> result = objDvdList.Where(x => x.lName.ToLower() == lName.ToLower()).ToList();
+
+
+            return View(result);
 
             //return Json(objDvdList);
         }

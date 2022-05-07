@@ -20,7 +20,6 @@ namespace groupCW.Controllers
                         from dvdtitles in _db.DVDTitles
 
                         join dvdcopy in _db.DVDCopies on dvdtitles.DVDNumber equals dvdcopy.DVDNumber
-                        
                         join loan in _db.Loans on dvdcopy.CopyNumber equals loan.CopyNumber into DVDCopyLoanGroup
 
                         from test in DVDCopyLoanGroup.DefaultIfEmpty()
@@ -30,6 +29,7 @@ namespace groupCW.Controllers
                         from t in grp.DefaultIfEmpty()
 
                         select new ShowAllViewModel {
+                            
                             DvdTitle = dvdtitles.DVDTitles,
                             PenaltyCharge = Int32.Parse(dvdtitles.PenaltyCharge),
                             CopyNumber = dvdcopy.CopyNumber.ToString(),
