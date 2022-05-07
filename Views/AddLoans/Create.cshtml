@@ -1,0 +1,79 @@
+﻿@model DatabaseCoursework.Models.Loan
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Loan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoanTypeNumber" class="control-label"></label>
+                <select asp-for="LoanTypeNumber" name="LoanTypeNumber" id="LoanTypeNumber" class="form-select">
+                    <option value="" class="text-dark">Choose a dvd</option>
+                        @foreach(var stu in ViewBag.loantype)
+                        {
+                            <option class="text-dark" value=@stu.LoanTypeNumber>@stu.LoanTypes</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CopyNumber" class="control-label"></label>
+                 <select asp-for="CopyNumber" name="CopyNumber" id="CopyNumber" class="form-select">
+                    <option value="" class="text-dark">Choose a dvd</option>
+                        @foreach(var stu in ViewBag.copynumber)
+                        {
+                            <option class="text-dark" value=@stu.CopyNumber>@stu.CopyNumber</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberNumber" class="control-label"></label>
+                <select asp-for="MemberNumber" name="MemberNumber" id="MemberNumber" class="form-select">
+                    <option value="" class="text-dark">Choose a dvd</option>
+                        @foreach(var stu in ViewBag.membernumber)
+                        {
+                            <option class="text-dark" value=@stu.MemberNumber>@stu.MemberFirstName @stu.MemberLastName</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOut" class="control-label"></label>
+                <input asp-for="DateOut" disabled class="form-control" />
+                <span asp-validation-for="DateOut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateDue" class="control-label"></label>
+                <input asp-for="DateDue" disabled class="form-control" />
+                <span asp-validation-for="DateDue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateReturned" class="control-label"></label>
+                <input asp-for="DateReturned" disabled class="form-control" />
+                <span asp-validation-for="DateReturned" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

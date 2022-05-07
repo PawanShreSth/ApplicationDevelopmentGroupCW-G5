@@ -23,14 +23,19 @@
         @foreach(var obj in Model)
         {
             <tr>
-                <td class="text-white" width="14.28%">@obj.dvdTitle</td>
-                <td class="text-white" width="14.28%">@obj.dvdReleaseDate</td>
-                <td class="text-white" width="14.28%">@obj.copyNumber</td>
-                <td class="text-white" width="14.28%">@obj.dvdDatePurchased</td>
-                <td class="text-white" width="14.28%">@obj.dvdDateReturned</td>
-                <td class="text-white" width="14.28%">@obj.dvdDateOut</td>
-                <td class="text-white" width="14.28%">
-                   <button class="badge rounded-pill bg-info">Delete</button>
+                <td class="text-white" width="15%">@obj.dvdTitle</td>
+                <td class="text-white" width="15%">@obj.dvdReleaseDate</td>
+                <td class="text-white" width="10%">@obj.copyNumber</td>
+                <td class="text-white" width="15%">@obj.dvdDatePurchased</td>
+                <td class="text-white" width="15%">@obj.dvdDateReturned</td>
+                <td class="text-white" width="15%">@obj.dvdDateOut</td>
+                <td class="text-white" width="15%">
+                   <a 
+                        asp-controller="RemoveOldDVD"
+                        asp-action="RemoveDVD" 
+                        asp-route-id="@obj.dvdid" 
+                        style="text-decoration: none"
+                        class="badge rounded-pill bg-info">Delete</a>
                 </td>
             </tr>
         }

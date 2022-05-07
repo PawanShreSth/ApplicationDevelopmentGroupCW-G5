@@ -28,12 +28,16 @@
                     <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
                           <div class="dropdown-menu" style="min-width: 320px">
+
+
+
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="MemberSearch" asp-action="Index">3 Search Members</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="CastMemberSearch" asp-action="Index">4 Show Producers, Studio & Cast Lists</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="CopyNumberSearch" asp-action="Index">5 Search DVD by Copy Number</a>
-                                <div class="dropdown-divider"></div>
+                                 <a class="nav-link text-black hover" asp-area="" asp-controller="AddLoans" asp-action="Create">6 Add Loan to a member</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="ShowAllDVD" asp-action="Index">7 Update DVD Return Date</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="TotalDVDLoan" asp-action="Index">8 Search Member with total loan taken</a>
+                                <a class="nav-link text-black hover" asp-area="" asp-controller="AddDVD" asp-action="Create">9 Add DVD</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="RemoveOldDVD" asp-action="Index">10 Remove Old DVDs older than 365 days</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="LoanedOutDVDs" asp-action="Index">11 Show DVDs currently on Loan in last 31 days</a>
                                 <a class="nav-link text-black hover" asp-area="" asp-controller="NotBorrowedDVD31Days" asp-action="Index">12 Show Member who have not borrowed in last 31 days</a>
@@ -43,7 +47,10 @@
                                 @*<div class="dropdown-divider"></div>*@
                            </div>
                 </li>
-                       
+
+                       <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DashBoard" asp-action="Index">View Dashboard</a>
+                        </li>
                 }
 
                 

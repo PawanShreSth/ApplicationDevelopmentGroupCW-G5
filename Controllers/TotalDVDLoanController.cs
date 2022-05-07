@@ -26,7 +26,7 @@ namespace groupCW.Controllers
                         Address = members.MemberAddress,
                         DateOfBirth = members.MemberDateOfBirth,
                         MembershipCategoryDescription = mbscategory.MembershipCategoryDescription,
-                        MembershipCategoryTotalLoans = mbscategory.MembershipCategoryTotalLoans == null ? 0 : Int32.Parse(mbscategory.MembershipCategoryTotalLoans),
+                        MembershipCategoryTotalLoans = mbscategory.MembershipCategoryTotalLoans == null ? 0 :mbscategory.MembershipCategoryTotalLoans,
                     }
                 ).Join(_db.Loans,
                     member => member.MemberNumber,

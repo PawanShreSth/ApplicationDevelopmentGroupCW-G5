@@ -29,6 +29,7 @@ namespace groupCW.Controllers
                     copies => copies.copyNumber, loan => loan.CopyNumber,
                     (copies, loan) => new RemoveOldDVDViewModel()
                     {
+                        dvdid = copies.dvdid,
                         dvdTitle = copies.dTitle,
                         dvdReleaseDate = copies.dvdReleasedDate,
                         copyNumber = copies.copyNumber,
@@ -36,10 +37,22 @@ namespace groupCW.Controllers
                         dvdDateReturned = loan.DateReturned,
                         dvdDateOut = loan.DateOut,
 
-                    }).Where(x => x.dvdDatePurchased <= DateTime.Now.AddDays(-365) && x.dvdDateReturned != null).ToList();
+                    }).Where(x => x.dvdDatePurchased <= DateTime.Now.AddDays(-365) && x.dvdDateReturned != null)
+                    .ToList();
 
-            return View(objDvdList);
+            List<RemoveOldDVDViewModel> objDvdList2 = objDvdList.DistinctBy(x => x.copyNumber).ToList();
 
+            return View(objDvdList2);
         }
+
+        public  IActionResult RemoveDVD (int id)
+        {
+            _db.Remove(_db.DVDTitles.Single(a => a.DVDNumber == id));
+
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

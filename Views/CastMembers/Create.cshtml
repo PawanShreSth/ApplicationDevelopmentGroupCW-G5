@@ -1,0 +1,58 @@
+﻿@model DatabaseCoursework.Models.CastMember
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>CastMember</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+            <div class="form-group">
+                <label asp-for="ActorNumber" class="control-label"></label>
+                <select asp-for="ActorNumber" name="ActorNumber" id="ActorNumber" class="form-select">
+                    <option value="" class="text-dark">Choose an actor</option>
+                        @foreach(var stu in ViewBag.actor)
+                        {
+                            <option class="text-dark" value=@stu.ActorNumber>@stu.ActorFirstname @stu.ActorSurname</option>
+                        }
+
+                </select>
+                <span asp-validation-for="ActorNumber" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="DVDNumber" class="control-label"></label>
+                <select asp-for="DVDNumber" name="DVDNumber" id="DVDNumber" class="form-select">
+                    <option value="" class="text-dark">Choose a dvd</option>
+                        @foreach(var stu in ViewBag.dvdtitles)
+                        {
+                            <option class="text-dark" value=@stu.DVDNumber>@stu.DVDTitles</option>
+                        }
+                </select>
+                <span asp-validation-for="DVDNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

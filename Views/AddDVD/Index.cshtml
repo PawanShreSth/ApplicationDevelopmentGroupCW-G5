@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DatabaseCoursework.Models.DVDTitle>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudioNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProducerNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DVDTitles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateReleased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StandardCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PenaltyCharge)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudioNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProducerNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DVDTitles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateReleased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandardCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PenaltyCharge)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DVDNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DVDNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DVDNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

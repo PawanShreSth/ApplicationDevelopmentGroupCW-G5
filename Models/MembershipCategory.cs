@@ -9,6 +9,6 @@ namespace DatabaseCoursework.Models
         public string? MembershipCategoryDescription { get; set; }
 
         // Total number of dvd loan taken by member user
-        public string? MembershipCategoryTotalLoans { get; set; }
+        public int MembershipCategoryTotalLoans { get; set; }
     }
 }
