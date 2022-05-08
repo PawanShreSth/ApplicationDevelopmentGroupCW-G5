@@ -20,9 +20,19 @@ namespace groupCW.Controllers
         }
 
         // Number 1
-        public IActionResult Index()
+        public IActionResult Index(string show)
         {
-            return View();
+            JoinHelper j;
+            j = new JoinHelper();
+
+            if (show != null) {     
+                j.show = show;
+            } else
+            {
+                return View();
+            }
+
+            return View(j);
         }
 
         [HttpPost]
@@ -49,7 +59,7 @@ namespace groupCW.Controllers
                      lName = act.ActorSurname,
                      castMemberId = castmeme.castmemberid,
                      dTitleName = castmeme.dTitle,
-                     
+                     releaseDate2 = castmeme.releaseDate.ToString(),
                  }
                  ).Where(x => x.lName.ToLower() == lName.ToLower()).ToList();
 
@@ -59,7 +69,7 @@ namespace groupCW.Controllers
         }
 
         // Number 2
-        public IActionResult DVDWithAvailability()
+        public IActionResult DVDWithAvailability(string show)
         {
             return View();
         }

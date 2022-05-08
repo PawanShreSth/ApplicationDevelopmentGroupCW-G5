@@ -92,7 +92,7 @@ namespace groupCW.Controllers
                     dateOut = loans.dateOut,
 
                     copyNumber = copies.DVDNumber,
-
+                    
                 }
             ).Join(_db.DVDTitles,
                 dvdcopies => dvdcopies.copyNumber, dvdtitle => dvdtitle.DVDNumber,
@@ -104,7 +104,7 @@ namespace groupCW.Controllers
                     copyNumber = dvdcopies.copyNumber,
                     dvdtitle = dvdtitle.DVDTitles,
                     dvdNumberId = dvdtitle.DVDNumber,
-                    releaseDate2 = dvdtitle.DateReleased.ToString(),
+                    releaseDate2 = dvdtitle.DateReleased.ToString()
                 }
             ).Where(x => x.lName.ToLower() == memberLastName.ToLower() & x.dateOut <= lastDate).ToList();
 

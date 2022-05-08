@@ -22,6 +22,8 @@
 
         public int copyId { get; set; }
 
+        public string show { get; set; }
+
         public int copyNumber { get; set; }
 
         public DateTime? dateOut { get; set; }

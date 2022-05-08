@@ -14,6 +14,9 @@
         public DateTime? dvdReleaseDate { get; set; }
         public DateTime? dateDue { get; set; }
 
+        public string? dateDueStringOnlyDate { get; set; }
+
+
         public DateTime? datePurchased { get; set; }
         public DateTime? dateReturned { get; set; }
         public string? dvdTitle { get; set; }

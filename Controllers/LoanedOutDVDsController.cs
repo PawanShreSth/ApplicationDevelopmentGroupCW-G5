@@ -1,6 +1,7 @@
 ﻿using groupCW.Data;
 using groupCW.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace groupCW.Controllers
 {
@@ -118,14 +119,20 @@ namespace groupCW.Controllers
                         lName = dvdCopies.lName,
                         datePurchased = dvdCopies.datePurchased,
                         dvdNumber = dvdCopies.dvdNumber,
-                        dvdTitle = dvdTitles.DVDTitles
+                        dvdTitle = dvdTitles.DVDTitles,
+                        dateDueStringOnlyDate = dvdCopies.dateOut.ToString()
                     }
                 )
-                .Where(x => x.dateOut == date && x.dateReturned == null)
+                .Where(x => x.dateReturned == null)
                 .ToList();
 
+            var o = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
 
-            return View(loanedOut);
+
+            List<LoanedOutDVDViewModel> loanedOut2 = loanedOut.Where(x => x.dateDueStringOnlyDate.Split(' ')[0] == o).ToList();
+
+
+            return View(loanedOut2);
         }
     }
 }

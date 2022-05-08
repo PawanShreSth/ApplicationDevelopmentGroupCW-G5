@@ -48,13 +48,10 @@ namespace groupCW.Controllers
                 .GroupBy(x => x.MemberNumber)
                 .Select(x => new TotalDVDLoanViewModel
                 {
-                    //UID = x.Key,
-                    //List = x.ToList(),
-
                     Total = x.Count(),
                     MemberNumber = x.Single().MemberNumber,
-                    MembershipCategoryDescription  = x.Single().MembershipCategoryDescription,
-                    MembershipCategoryTotalLoans = x.Single().MembershipCategoryTotalLoans,
+                    MembershipCategoryDescription = x.Single().MembershipCategoryDescription,
+                    MembershipCategoryTotalLoans = Int32.Parse(x.Single().MembershipCategoryTotalLoans.ToString()),
                     FirstName = x.Single().FirstName,
                     LastName = x.Single().LastName,
                     Address = x.Single().Address,
@@ -62,10 +59,9 @@ namespace groupCW.Controllers
                     LoanMemberId = x.Single().LoanMemberId,
                     DateReturned = x.Single().DateReturned,
                 })
-                .OrderBy(x => x.FirstName)
                 .ToList();
 
-
+            List<TotalDVDLoanViewModel> t = t2.OrderBy(x => x.FirstName).ToList();
 
             // return Json(t2);
 
