@@ -49,7 +49,7 @@
         <partial name="navigationNew" />
 
 
-    <div style="text-align: center; margin-left: -730px; padding: 10px; margin-top: 10px; margin-bottom: 20px;">
+    <div style="text-align: center; margin-left: -570px; padding: 10px; margin-top: 10px; margin-bottom: 20px;">
         <span style="border: 1px solid #11cdef; padding: 7px; color: #11cdef; border-radius: 1em; font-weight: 600">Total Row Count: @( Model.Count() )</span>
         <span style="font-weight: 600;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update Return Date</span>
         </div>
@@ -58,32 +58,32 @@
    
     </div>
 
-    <table class="table" style="width: 1400px; margin-left: 300px;">
-        <thead style="border-bottom: 2px solid white; font-size: 15px !important;">
+    <table class="table" style="width: 1200px; margin-left: 300px;">
+        <thead style="border-bottom: 2px solid white; font-size: 14px !important;">
             <tr>
-                <th class="text-center" style="width: 3%">DVDTitle</th>
+                <th class="text-center" style="width: 1%">DVDTitle</th>
                 <th class="text-center" style="width: 1%">CopyNo</th>
                 <th class="text-center" style="width: 1%">LoanNo</th>
-                <th class="text-center" style="width: 15%">Date Out</th>
-                <th class="text-center" style="width: 15%">DueDate</th>
-                <th class="text-center" style="width: 15%">ReturnDate</th>
-                <th class="text-center" style="width: 2%">IsLate?</th>
-                <th class="text-center" style="width: 5%">TotalLateDays</th>
-                <th class="text-center" style="width: 8%">PenaltyCharge</th>
-                <th class="text-center" style="width: 5%">Total Penalty</th>
+                <th class="text-center" style="width: 5%">Date Out</th>
+                <th class="text-center" style="width: 5%">DueDate</th>
+                <th class="text-center" style="width: 5%">ReturnDate</th>
+                <th class="text-center" style="width: 1%">IsLate?</th>
+                <th class="text-center" style="width: 1%">TotalLate</th>
+                <th class="text-center" style="width: 1%">PenaltyCharge</th>
+                <th class="text-center" style="width: 3%">Total Penalty</th>
                 <th class="text-center" style="width: 5%"></th>
             </tr>
         </thead>
 
-        <tbody style="font-size: 13px !important;">
+        <tbody style="font-size: 12px !important;">
         @foreach(var obj in Model)
         {
             <tr>
-                <td class="text-dark-50 text-center" width="3%">@obj.DvdTitle</td>
-                <td class="text-dark-50 text-center" width="1%">@obj.CopyNumber</td>
+                <td class="text-dark-50 text-center">@obj.DvdTitle</td>
+                <td class="text-dark-50 text-center">@obj.CopyNumber</td>
                 
                 @*Loan No*@
-                <td class="text-dark-50 text-center" width="1%">
+                <td class="text-dark-50 text-center" >
                     @if (@obj.LoanNumber == null)
                     {
                         <span>-</span>
@@ -94,7 +94,7 @@
                 </td>
 
                 @*Date Out*@
-                <td class="text-dark-50 text-center" width="15%">
+                <td class="text-dark-50 text-center">
                     @if (@obj.DateOut != null)
                     {
                         <span>@( @obj.DateOut == null ? "" : @obj.DateOut.ToString().Split(' ')[0] )</span>
@@ -105,7 +105,7 @@
                 </td>
 
                 @*Due Date*@
-                <td class="text-dark-50 text-center" width="15%">
+                <td class="text-dark-50 text-center">
                     @if (@obj.DateOut != null) {
                         <span>@(@obj.DueDate == null ? "" : @obj.DueDate.ToString().Split(' ')[0])</span>
                     } else {
@@ -114,7 +114,7 @@
                 </td>
 
                 @*Date Returned*@
-                <td class="text-dark-50 text-center" width="5%">
+                <td class="text-dark-50 text-center">
                     @if (@obj.DateOut != null && @obj.ReturnDate == null)
                     {
                         <span>Not Returned</span>
@@ -128,7 +128,7 @@
                 </td>
 
                 @*Is late?*@
-                <td class="text-dark-50 text-center" width="2%">
+                <td class="text-dark-50 text-center">
                     @if (@obj.DateOut == null)
                     {
                         <span>-</span>
@@ -143,7 +143,7 @@
                 </td>
 
                 @*If late? Total late days*@
-                <td class="text-dark-50 text-center" width="5%">
+                <td class="text-dark-50 text-center">
                     @if (@obj.DateOut == null)
                     {
                         <span>-</span>
@@ -161,7 +161,7 @@
                 </td>
                 
                 @*Penalty Charge (per day)*@
-                <td class="text-dark-50 text-center" width="8%">
+                <td class="text-dark-50 text-center">
                    
                     @if (@obj.ReturnDate > @obj.DueDate)
                     {
@@ -175,7 +175,7 @@
                 </td>
 
                 @*Total Penalty*@
-                <td class="text-dark-50 text-center" width="3%">
+                <td class="text-dark-50 text-center">
 
                     @if ( 
                     @obj.NoOfDaysDVDNotReturnedAfterDeadline != null
@@ -200,7 +200,7 @@
                 </td>
 
                 @*Update Button*@
-                <td class="text-dark-50 text-center" width="5%">
+                <td class="text-dark-50 text-center">
 
                     @if (@obj.DateOut != null && @obj.ReturnDate == null)
                     {

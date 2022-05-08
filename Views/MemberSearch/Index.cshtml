@@ -43,18 +43,18 @@
         <partial name="navigationNew" />
 
 
-        <form method="post" asp-action="Index" class="mb-3" style="padding-top: 40px ;margin-left: 400px; max-width: 1200px; z-index: 100; ">
+        <form method="post" asp-action="Index" class="mb-3" style="padding-top: 40px ;margin-left: 400px; max-width: 800px; z-index: 100; ">
             <input asp-for="memberLastName" class="form-control mb-3" placeholder="Search Member By Last Name" />
              <button type="submit" class="btn btn-outline-info" style="width: 120px"><i class="bi bi-search"></i> Search</button>
         </form>
 
         @if ( Model.showAllMember == true )
         {
-            <div style="text-align: center; margin-left: -800px; padding: 10px; margin-top: 150px;">
+            <div style="text-align: center; margin-left: -535px; padding: 10px; margin-top: 150px;">
                 <span style="border: 1px solid #11cdef; padding: 7px; color: #11cdef; border-radius: 1em; font-weight: 600">
                     Total Row Count: @( Model.JoinHelperList.Count() )</span></div>
 
-            <table class="table" style="max-width: 1200px; margin-left: 350px; margin-top: 10px;">
+            <table class="table" style="max-width: 900px; margin-left: 420px; margin-top: 10px;">
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 25%">DVD Titles</th>

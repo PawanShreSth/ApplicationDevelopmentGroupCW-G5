@@ -48,7 +48,12 @@
     <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
     <link id="pagestyle" href="~/assets/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
 
-
+    <style>
+        .custom-button:hover {
+            transform: scaleX(1.1) !important;
+            transition: all .2s linear;
+        }
+    </style>
 
 </head>
 
@@ -281,7 +286,7 @@
             </div>
 
             <div class="row mt-4">
-                <div class="text-center" style="height: 580px;">
+                <div class="text-center" style="height: 560px;">
                     <div class="card z-index-2 h-100" style="background-image: url('../assets/img/roll.jpg'); background-size: cover">
                         <div class="card-header pb-0 pt-3 bg-transparent h2 text-white">
                             Welcome to Ropey DVD's Dashboard!!!
@@ -292,7 +297,7 @@
                             </div>
                             <a asp-controller="Home" 
                             asp-action="Index"
-                            class="btn btn-primary btn-sm mb-0 w-15" type="button">Go Back To Home Page</a>
+                            class="btn btn-primary btn-sm mb-0 w-20 custom-button" type="button">Go Back To Home Page</a>
                         </div>
                         
 
