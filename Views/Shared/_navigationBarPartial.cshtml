@@ -16,11 +16,11 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-route-show="no" asp-area="" asp-controller="DVDSearch" asp-action="Index">1 Search DVD</a>
+                            <a class="nav-link"  asp-area="" asp-controller="Number1" asp-action="Index">1 Search DVD</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-route-show="no" asp-area="" asp-controller="DVDSearch" asp-action="DVDWithAvailability">2 Search DVD with availability</a>
+                            <a class="nav-link" asp-route-show="no" asp-area="" asp-controller="Number2" asp-action="Index">2 Search DVD with availability</a>
                         </li>
 
                     @if(User.IsInRole("Manager") || User.IsInRole("Assistant"))
