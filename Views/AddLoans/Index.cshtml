@@ -22,15 +22,22 @@
 
 </head>
 <body>
-<p style="margin-top: 1rem">
+<div style="display: flex; justify-content: space-between; align-items: center">
     <a style="font-size: 20px; 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-top: -5px;
     color: #11cdef; padding: .5rem; border: 2px solid #11cdef; margin: 1rem; text-decoration: none; border-radius: 1rem;
 " asp-action="Create"
     class="custom-btn"
-    >Create New</a>
-</p>
+    >Create New <i class="bi bi-plus-circle-fill"></i></a>
+    <div>
+<a asp-controller="DashBoard" asp-action="Index" class="custom-btn"
+style="padding: 1rem 2rem; border: 2px solid #11cdef; border-radius: 1rem; text-decoration: none; color: #11cdef">Back to Dashboard</a>
+
+    <a class="custom-btn" asp-action="Index" style="padding: 1rem 2rem; border: 2px solid #11cdef; border-radius: 1rem; text-decoration: none; color: #11cdef">
+        Back to List</a>
+    </div>
+</div>
 
 <table class="table" style="width: 1000px; margin: 2rem auto;">
     <thead class="thead-light">
@@ -78,8 +85,8 @@
                 @Html.DisplayFor(modelItem => item.Member.MemberNumber)
             </td>
             <td class="text-center">
-                <a asp-action="Edit" asp-route-id="@item.LoanNumber"><i class="bi bi-pencil-fill text-dark"></i></a> <span style="color: black">|</span>
-                <a asp-action="Details" asp-route-id="@item.LoanNumber"><i class="bi bi-info-circle text-dark"></i></a> <span style="color: black">|</span>
+                <a asp-action="Edit" asp-route-id="@item.LoanNumber"><i class="bi bi-pencil-fill text-dark"></i></a> <span style="color: black">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a asp-action="Details" asp-route-id="@item.LoanNumber"><i class="bi bi-info-circle text-dark"></i></a> <span style="color: black">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                 <a asp-action="Delete" asp-route-id="@item.LoanNumber"><i class="bi bi-trash-fill text-danger"></i></a>
             </td>
         </tr>
