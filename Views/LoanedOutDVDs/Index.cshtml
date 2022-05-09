@@ -73,8 +73,8 @@
                 <tr>
                     @*<td class="text-white" width="20%">@obj.dvdTitle</td>*@
                     @*<td class="text-white" width="5%">@obj.copyNumber</td>*@
-                    <td class="text-dark-50 text-center" width="15%">@obj.dateOut</td>
-                    <td class="text-dark-50 text-center" width="5%">@obj.TotalNumberOfLoans</td>   
+                    <td class="text-dark-50 text-center" width="15%">@obj.dateOut.ToString().Split(' ')[0]</td>
+                    <td class="text-dark-50 text-center" width="5%">@obj.TotalNumberOfLoans</td>   '
                      <td class="text-dark-50 text-center" width="20%">
                        <a asp-route-date="@obj.dateOut" asp-controller="LoanedOutDVDs" asp-action="SalesInGivenDate" class="badge rounded-pill bg-info text-decoration-none">View Members who bought dvd in @obj.dateOut</a>
                     </td>

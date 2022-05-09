@@ -42,12 +42,48 @@ namespace groupCW.Controllers
 
             List<RemoveOldDVDViewModel> objDvdList2 = objDvdList.DistinctBy(x => x.copyNumber).ToList();
 
-            return View(objDvdList2);
+            List<RemoveOldDVDViewModel> copies = _db.DVDCopies.Join(_db.DVDTitles,
+                    copies => copies.DVDNumber, dvd => dvd.DVDNumber,
+                    (copies, dvd) => new RemoveOldDVDViewModel
+                    {
+                        dvdTitle = dvd.DVDTitles,
+                        dvdid = dvd.DVDNumber,
+                        copyNumber = copies.CopyNumber,
+                        dvdReleasedDate = dvd.DateReleased,
+                        dvdDatePurchased = copies.DatePurchased,
+
+                    }
+                )
+                .Where(x => x.dvdDatePurchased <= DateTime.Now.AddDays(-365))
+                .ToList();
+
+            List<RemoveOldDVDViewModel> loans = _db.Loans.Where(x => x.DateReturned != null)
+                .Select(x => new RemoveOldDVDViewModel { 
+                    copyNumber = x.CopyNumber,
+                    dvdDateReturned = x.DateReturned,
+                })
+                .ToList();
+
+            List<RemoveOldDVDViewModel> test = new List<RemoveOldDVDViewModel>();
+
+            for (var i = 0; i < copies.Count(); i++) {
+                var count = 0;
+                for (var j = 0; j < loans.Count(); j++) {
+                    if (copies[i].copyNumber == loans[j].copyNumber) {
+                        copies[i].dvdDateReturned = loans[j].dvdDateReturned;
+                        test.Add(copies[i]);
+                    }
+
+                }
+            }
+
+
+            return View(test);
         }
 
         public  IActionResult RemoveDVD (int id)
         {
-            _db.Remove(_db.DVDTitles.Single(a => a.DVDNumber == id));
+            _db.Remove(_db.DVDCopies.Single(x => x.CopyNumber == id));
 
             _db.SaveChanges();
 

@@ -59,11 +59,11 @@
     <thead>
         <tr>
             <th class="text-center" style="width: 14.28%">DVD Title</th>
-            <th class="text-center" style="width: 14.28%">DVD Release Date</th>
+     
             <th class="text-center" style="width: 14.28%">Copy Number</th>
             <th class="text-center" style="width: 14.28%">DVD Date Purchased</th>
             <th class="text-center" style="width: 14.28%">Return Date</th>
-            <th class="text-center" style="width: 14.28%">Date Out</th>
+            
             <th class="text-center" style="width: 14.28%"></th>
         </tr>
     </thead>
@@ -74,16 +74,16 @@
         {
             <tr>
                 <td class="text-dark-50 text-center" width="15%">@obj.dvdTitle</td>
-                <td class="text-dark-50 text-center" width="15%">@obj.dvdReleaseDate</td>
+           
                 <td class="text-dark-50 text-center" width="10%">@obj.copyNumber</td>
                 <td class="text-dark-50 text-center" width="15%">@obj.dvdDatePurchased</td>
                 <td class="text-dark-50 text-center" width="15%">@obj.dvdDateReturned</td>
-                <td class="text-dark-50 text-center" width="15%">@obj.dvdDateOut</td>
+                
                 <td class="text-dark-50 text-center" width="15%">
                    <a 
                         asp-controller="RemoveOldDVD"
                         asp-action="RemoveDVD" 
-                        asp-route-id="@obj.dvdid" 
+                        asp-route-id="@obj.copyNumber" 
                         style="text-decoration: none"
                         class="badge rounded-pill bg-info text-center">Delete</a>
                 </td>

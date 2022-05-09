@@ -2,6 +2,9 @@
 {
     public class RemoveOldDVDViewModel
     {
+        internal DateTime? dvdReleasedDate;
+        internal string dTitle;
+
         public DateTime? dvdReleaseDate { get; set; }
         public DateTime? dvdDateOut { get; set; }
         public DateTime? dvdDatePurchased { get; set; }
