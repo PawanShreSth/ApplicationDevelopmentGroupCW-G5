@@ -12,6 +12,13 @@ namespace groupCW.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CastMember>()
+                .HasKey(o => new { o.DVDNumber, o.ActorNumber });
+        }
+
         public DbSet<Actor> Actors { get; set; }
         public DbSet<CastMember> CastMembers { get; set; }
         public DbSet<DVDCategory> DVDCategories { get; set; }

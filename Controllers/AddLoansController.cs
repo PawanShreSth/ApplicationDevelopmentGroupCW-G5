@@ -131,7 +131,7 @@ namespace groupCW.Controllers
                 {
                     if (age < 18 && items.ageRestricted == "yes")
                     {
-                        return Json("ageCheck");
+                        return Json("This person is age restricted to buy the DVD");
                     }
                 }
 
@@ -188,13 +188,16 @@ namespace groupCW.Controllers
                })
                .OrderBy(x => x.FirstName)
                .ToList();
-
+            
 
             foreach (var totalLoans in t2)
             {
+             
                 var memberTakenLoansTillNow = totalLoans.Total;
+                
                 var totalLoansAllowedForMembers = totalLoans.MembershipCategoryTotalLoans;
-                if (totalLoansAllowedForMembers >= memberTakenLoansTillNow)
+                //return Json(memberTakenLoansTillNow);
+                if (totalLoansAllowedForMembers < memberTakenLoansTillNow)
                 {
                     return Json("Sorry the members has taken loan of too Many DVDs");
                 }
