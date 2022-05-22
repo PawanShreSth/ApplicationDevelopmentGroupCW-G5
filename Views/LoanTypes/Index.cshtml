@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DatabaseCoursework.Models.CastMember>
+﻿@model IEnumerable<DatabaseCoursework.Models.LoanType>
 
 @{
     Layout = null;
@@ -21,10 +21,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DVDTitle)
+                @Html.DisplayNameFor(model => model.LoanTypes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Actor)
+                @Html.DisplayNameFor(model => model.LoanDuration)
             </th>
             <th></th>
         </tr>
@@ -33,14 +33,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DVDTitle.DVDNumber)
+                @Html.DisplayFor(modelItem => item.LoanTypes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Actor.ActorNumber)
+                @Html.DisplayFor(modelItem => item.LoanDuration)
             </td>
             <td>
-               
-                <a asp-action="Delete" asp-route-id="@item.DVDNumber">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.LoanTypeNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.LoanTypeNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.LoanTypeNumber">Delete</a>
             </td>
         </tr>
 }
