@@ -74,6 +74,14 @@ namespace groupCW.Controllers
                         test.Add(copies[i]);
                     }
 
+                    if (copies[i].copyNumber == loans[j].copyNumber) {
+                        count++;   
+                    }
+                }
+
+                if (count == 0) { 
+                    test.Add(copies[i]);
+                    count = 0;
                 }
             }
 

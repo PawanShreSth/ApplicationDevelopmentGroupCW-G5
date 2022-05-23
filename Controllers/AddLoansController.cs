@@ -55,8 +55,35 @@ namespace groupCW.Controllers
             //ViewData["CopyNumber"] = new SelectList(_context.DVDCopies, "CopyNumber", "CopyNumber");
             //ViewData["LoanTypeNumber"] = new SelectList(_context.LoanTypes, "LoanTypeNumber", "LoanTypeNumber");
             //ViewData["MemberNumber"] = new SelectList(_context.Members, "MemberNumber", "MemberNumber");
+
+            IEnumerable<RestrictionDuringLoan> loan = _context.Loans.Join(_context.DVDCopies,
+                loan => loan.CopyNumber, copy => copy.CopyNumber,
+                (loan, copy) => new RestrictionDuringLoan()
+                {
+                    dateReturned = loan.DateReturned,
+                    copyNumber = copy.CopyNumber
+                }
+            ).Where(x => x.dateReturned == null).ToList();
+
+            var dvdCopies = _context.DVDCopies.ToList();
+
+            List<int> itemCopy = new List<int>();
+            foreach (var item in dvdCopies)
+            {
+                itemCopy.Add(item.CopyNumber);
+
+            }
+
+            List<int> copyNumberss = new List<int>();
+
+            foreach (var loans in loan)
+            {
+                copyNumberss.Add(loans.copyNumber);
+
+            }
+            var haha = itemCopy.Except(copyNumberss).ToList();
             ViewBag.loantype = _context.LoanTypes.ToArray();
-            ViewBag.copynumber = _context.DVDCopies.ToArray();
+            ViewBag.copynumber = haha.ToArray();
             ViewBag.membernumber = _context.Members.ToArray();
             return View();
         }

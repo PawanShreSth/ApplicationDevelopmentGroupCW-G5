@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using groupCW.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
